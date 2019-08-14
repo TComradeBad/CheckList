@@ -5,6 +5,7 @@ namespace App\Http;
 use App\Http\Middleware\BanUsers;
 use App\Http\Middleware\DeleteUsers;
 use App\Http\Middleware\EditChecklists;
+use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsAuth;
 use App\Http\Middleware\SetPermissions;
 use App\Http\Middleware\SetUsersChecklistsCount;
@@ -76,6 +77,7 @@ class Kernel extends HttpKernel
         'set-users-checklists-count' => SetUsersChecklistsCount::class,
         'view-user-checklists' => ViewUsersCheckLists::class,
         'view-users-info' => ViewUsersInfo::class,
+        'is-admin' => IsAdmin::class,
     ];
 
     /**

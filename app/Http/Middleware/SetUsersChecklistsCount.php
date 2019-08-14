@@ -16,7 +16,7 @@ class SetUsersChecklistsCount
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()->can('set users checklist count')) {
+        if (!\Auth::check() || !Auth::user()->can('set users checklist count')) {
             return abort(404);
         }
         return $next($request);

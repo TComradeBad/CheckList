@@ -12,9 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('mainpage');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/admin_page','AdminController@adminPage')->middleware('is-admin');
+
+Route::get('/users_info','AdminController@userInfo')->middleware('view-users-info');
+
+Route::get('/delete_users','AdminController@usersDelete')->middleware('delete-users');

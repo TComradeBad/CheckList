@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Auth;
 
-class BanUsers
+class IsAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,7 +15,7 @@ class BanUsers
      */
     public function handle($request, Closure $next)
     {
-        if (!\Auth::check() || !Auth::user()->can("ban users")) {
+        if (!\Auth::check() || !\Auth::check() || !\Auth::user()->hasAnyRole(['admin', 'super-admin', 'moderator'])) {
             return abort(404);
         }
         return $next($request);

@@ -16,7 +16,7 @@ class ViewUsersCheckLists
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()->can('view users checklists')) {
+        if (!\Auth::check() || !Auth::user()->can('view users checklists')) {
             return abort(404);
         }
         return $next($request);
