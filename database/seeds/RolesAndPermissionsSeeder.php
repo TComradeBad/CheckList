@@ -19,8 +19,8 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'edit checklists']);
         Permission::create(['name' => 'view users info']);
         Permission::create(['name' => 'view users checklists']);
-        Permission::create(['name' => 'delete user']);
-        Permission::create(['name' => 'set permission']);
+        Permission::create(['name' => 'delete users']);
+        Permission::create(['name' => 'set permissions']);
         Permission::create(['name' => 'ban users']);
         Permission::create(['name' => 'set users checklist count']);
 

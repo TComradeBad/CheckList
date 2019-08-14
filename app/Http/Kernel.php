@@ -2,6 +2,14 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\BanUsers;
+use App\Http\Middleware\DeleteUsers;
+use App\Http\Middleware\EditChecklists;
+use App\Http\Middleware\IsAuth;
+use App\Http\Middleware\SetPermissions;
+use App\Http\Middleware\SetUsersChecklistsCount;
+use App\Http\Middleware\ViewUsersCheckLists;
+use App\Http\Middleware\ViewUsersInfo;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -60,6 +68,14 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'ban-users' => BanUsers::class,
+        'delete-users' => DeleteUsers::class,
+        'edit-checklists' => EditChecklists::class,
+        'is-auth' => IsAuth::class,
+        'set-permissions' => SetPermissions::class,
+        'set-users-checklists-count' => SetUsersChecklistsCount::class,
+        'view-user-checklists' => ViewUsersCheckLists::class,
+        'view-users-info' => ViewUsersInfo::class,
     ];
 
     /**
