@@ -24,8 +24,8 @@
         <br>
     @endif
     @if(Auth::check() && Auth::user()->can('set permissions'))
-        <a href="/set_permissions">
-            <button class="btn btn-warning">Set users permission</button>
+        <a href="/set_users_roles">
+            <button class="btn btn-warning">Set users roles</button>
         </a>
         <br>
         <br>

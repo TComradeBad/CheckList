@@ -10,6 +10,7 @@ class AdminController extends Controller
 
     public function __construct()
     {
+        $this->middleware('is-auth');
         $this->middleware('is-banned');
         $this->middleware('is-admin');
     }
@@ -73,5 +74,10 @@ class AdminController extends Controller
         $user->update();
         return redirect("/ban_users");
 
+    }
+
+    public function setUsersRolesView()
+    {
+        return view("adminPages.setroles", ["users" => User::all()]);
     }
 }

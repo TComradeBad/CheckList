@@ -21,7 +21,7 @@ Route::get('/you_are_banned',function (){
     if(!Auth::user()->banned){
 return abort(404);
     }else return view("banpage");
-});
+})->middleware('is-auth');
 
 /**
  * Admin Routes
@@ -47,6 +47,10 @@ Route::post('/ban_user/{user}', 'AdminController@banUser')->middleware('ban-user
 
 Route::post('/unban_user/{user}', 'AdminController@unbanUser')->middleware('ban-users')
     ->where('user', '[0-9]+');
+
+Route::get("/set_users_roles","AdminController@setUsersRolesView")->middleware('set-permissions');
+
+Route::get("/set_user_role","AdminController@setUsersRoles")->middleware('set-permissions');
 
 /**
  * User routes
