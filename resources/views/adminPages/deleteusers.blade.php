@@ -1,13 +1,20 @@
-@extends('layouts.app')]
+@extends('layouts.app')
 
 @section('content')
+    <table>
+        @foreach($users as $user)
+            <tr>
+                <td> {{$user->name}}</td>
+                <td>{{$user->email}}</td>
+                <td> @if(!$user->hasAnyRole(["admin","super-admin"]))
 
-    @foreach($users as $user)
-        {{$user->name}}    {{$user->name}}
-
-        <form action="" method="post">
-            <button>DELETE</button>
-        </form>
-    @endforeach
-
+                        <form action="/delete_user/{{$user->id}}" method="post">
+                            @csrf
+                            <button>DELETE</button>
+                        </form>
+                    @endif
+                </td>
+            </tr>
+        @endforeach
+    </table>
 @endsection

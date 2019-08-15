@@ -7,6 +7,7 @@ use App\Http\Middleware\DeleteUsers;
 use App\Http\Middleware\EditChecklists;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsAuth;
+use App\Http\Middleware\IsBanned;
 use App\Http\Middleware\SetPermissions;
 use App\Http\Middleware\SetUsersChecklistsCount;
 use App\Http\Middleware\ViewUsersCheckLists;
@@ -78,6 +79,7 @@ class Kernel extends HttpKernel
         'view-user-checklists' => ViewUsersCheckLists::class,
         'view-users-info' => ViewUsersInfo::class,
         'is-admin' => IsAdmin::class,
+        'is-banned' => IsBanned::class,
     ];
 
     /**
