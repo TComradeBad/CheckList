@@ -15,7 +15,7 @@ class IsBanned
      */
     public function handle($request, Closure $next)
     {
-        if (\Auth::user()->banned) {
+        if (\Auth::check() && \Auth::user()->banned) {
             return redirect("/you_are_banned");
         }
         return $next($request);
