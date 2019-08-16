@@ -16,7 +16,7 @@ class EditChecklists
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()->can("edit checklists")) {
+        if (!\Auth::check() || !Auth::user()->can("edit checklists")) {
             return abort(404);
         }
         return $next($request);

@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Auth;
 
-class BanUsers
+class IsBanned
 {
     /**
      * Handle an incoming request.
@@ -16,8 +15,8 @@ class BanUsers
      */
     public function handle($request, Closure $next)
     {
-        if (!\Auth::check() || !Auth::user()->can("ban users")) {
-            return abort(404);
+        if (\Auth::check() && \Auth::user()->banned) {
+            return redirect("/you_are_banned");
         }
         return $next($request);
     }

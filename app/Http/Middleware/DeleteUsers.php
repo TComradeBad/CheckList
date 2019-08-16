@@ -16,7 +16,7 @@ class DeleteUsers
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()->can("delete users")) {
+        if (!\Auth::check() || !Auth::user()->can("delete users")) {
             return abort(404);
         }
         return $next($request);

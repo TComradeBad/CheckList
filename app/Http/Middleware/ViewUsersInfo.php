@@ -16,7 +16,7 @@ class ViewUsersInfo
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()->can('view users info')) {
+        if (!\Auth::check() || !Auth::user()->can('view users info')) {
             return abort(404);
         }
         return $next($request);

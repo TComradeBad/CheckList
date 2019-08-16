@@ -16,7 +16,7 @@ class SetPermissions
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()->can('set permissions')) {
+        if (!\Auth::check() || !Auth::user()->can('set permissions')) {
             return abort(404);
         }
         return $next($request);
