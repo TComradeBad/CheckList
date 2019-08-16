@@ -8,9 +8,11 @@
         @endforeach
         {{$user->name}} {{$user->email}}
 
+        @if(!$user->hasrole("super-admin"))
         <a href="/set_user_role/{{$user->id}}">
             <button>SET ROLES</button>
         </a>
+        @endif
         <br><br>
 
     @endforeach

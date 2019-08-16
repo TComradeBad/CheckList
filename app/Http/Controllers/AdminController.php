@@ -78,6 +78,48 @@ class AdminController extends Controller
 
     public function setUsersRolesView()
     {
-        return view("adminPages.setroles", ["users" => User::all()]);
+        return view("adminPages.setRoles", ["users" => User::all()]);
+    }
+
+    public function setUserRole(User $user)
+    {
+        return view("adminPages.userRolesSettings", ["user" => $user]);
+    }
+
+    public function setUserRolePost(Request $request, User $user)
+    {
+        switch ($request->input("role")) {
+            case "user":
+                $user->syncRoles('user');
+                break;
+            case "moderator":
+                $user->syncRoles("moderator");
+                break;
+            case "admin":
+                $user->syncRoles("admin");
+                break;
+        }
+
+        return redirect("/set_user_role/" . $user->id);
+    }
+
+    public function setUsersCLCountView()
+    {
+        return view("adminPages.setCheckListCount", ["users" => User::all()]);
+    }
+
+    public function setUserCLCount(User $user)
+    {
+        return view("adminPages.setUserCLCount", ["user" => $user]);
+    }
+
+    public function setUserCLCountPost(Request $request, User $user)
+    {
+        $value1 = $request->input("max_cl");
+        $value2 = $request->input("max_item");
+        $user->setAttribute("max_check_lists_count", isset($value1) ? $value1 : 10);
+        $user->setAttribute("max_check_list_items_count", isset($value2) ? $value1 : 10);
+        $user->update();
+        return redirect("/set_user_cl_count/" . $user->id);
     }
 }

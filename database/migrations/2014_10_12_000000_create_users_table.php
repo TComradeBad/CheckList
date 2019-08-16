@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean("banned")->default("0");
+            $table->integer("max_check_lists_count")->default("10");
+            $table->integer("max_check_list_items_count")->default("10");
             $table->rememberToken();
             $table->timestamps();
         });

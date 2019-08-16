@@ -57,19 +57,51 @@
                         @endif
                     @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
+                            @foreach(Auth::user()->roles()->get() as $role)
+                                @switch($role->name)
+                                    @case("user")
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle text-primary" href="#"
+                                       role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{$role->name}} {{ Auth::user()->name }} <span class="caret"></span>
+                                    </a>
+                                    @break
+                                    @case("moderator")
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle text-success" href="#"
+                                       role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{$role->name}} {{ Auth::user()->name }} <span class="caret"></span>
+                                    </a>
+                                    @break
+                                    @case("admin")
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle text-warning" href="#"
+                                       role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{$role->name}} {{ Auth::user()->name }} <span class="caret"></span>
+                                    </a>
+                                    @break
+                                    @case("super-admin")
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle text-danger" href="#"
+                                       role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{$role->name}} {{ Auth::user()->name }} <span class="caret"></span>
+                                    </a>
+                                    @break
+                                @endswitch
+                            @endforeach
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+
+                            <div class="dropdown-menu dropdown-menu-right"
+                                 aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                <form id="logout-form" action="{{ route('logout') }}"
+                                      method="POST"
                                       style="display: none;">
                                     @csrf
                                 </form>

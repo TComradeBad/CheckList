@@ -4,7 +4,7 @@
     <table>
         @foreach($users as $user)
             <tr>
-                <td> {{$user->name}}</td>
+                <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td> @if(!$user->hasAnyRole(["admin","super-admin"]))
 

@@ -17,10 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/you_are_banned',function (){
-    if(!Auth::user()->banned){
-return abort(404);
-    }else return view("banpage");
+Route::get('/you_are_banned', function () {
+    if (!Auth::user()->banned) {
+        return abort(404);
+    } else return view("banpage");
 })->middleware('is-auth');
 
 /**
@@ -48,11 +48,23 @@ Route::post('/ban_user/{user}', 'AdminController@banUser')->middleware('ban-user
 Route::post('/unban_user/{user}', 'AdminController@unbanUser')->middleware('ban-users')
     ->where('user', '[0-9]+');
 
-Route::get("/set_users_roles","AdminController@setUsersRolesView")->middleware('set-permissions');
+Route::get("/set_users_roles", "AdminController@setUsersRolesView")->middleware('set-permissions')
+    ->where('user', '[0-9]+');
 
-Route::get("/set_user_role","AdminController@setUsersRoles")->middleware('set-permissions');
+Route::get("/set_user_role/{user}", "AdminController@setUserRole")->middleware('set-permissions')
+    ->where('user', '[0-9]+');
 
+Route::post("/set_user_role/{user}", "AdminController@setUserRolePost")->middleware('set-permissions')
+    ->where('user', '[0-9]+');
+
+Route::get("/set_check_list_count", "AdminController@setUsersCLCountView")->middleware('set-users-checklists-count');
+
+Route::get("/set_user_cl_count/{user}", "AdminController@setUserCLCount")->middleware('set-users-checklists-count')
+    ->where('user', '[0-9]+');
+
+Route::post("/set_user_cl_count/{user}","AdminController@setUserCLCountPost")->middleware('set-users-checklists-count')
+    ->where('user', '[0-9]+');
 /**
  * User routes
  */
-Route::get('/my_checklists',"UserController@myCheckLists");
+Route::get('/my_checklists', "UserController@myCheckLists");

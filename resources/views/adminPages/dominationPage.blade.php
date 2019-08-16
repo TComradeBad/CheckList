@@ -38,7 +38,7 @@
         <br>
     @endif
     @if(Auth::check() && Auth::user()->can('set users checklist count'))
-        <a href="/set_chklistcount">
+        <a href="/set_check_list_count">
             <button class="btn btn-warning">Set users checklist count</button>
         </a>
         <br>

@@ -16,6 +16,14 @@
     @endforeach <br>
     <br>
 
+    USER MAX CHECKLISTS COUNT {{$user->max_check_lists_count}} <br>
+
+    <br>
+
+    USER MAX CHECKLISTS ITEM COUNT {{$user->max_check_list_items_count}} <br>
+
+    <br>
+
     USER REGISTRATED : {{$user->created_at}} <br>
 
     <br>
