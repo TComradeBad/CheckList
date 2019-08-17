@@ -62,9 +62,23 @@ Route::get("/set_check_list_count", "AdminController@setUsersCLCountView")->midd
 Route::get("/set_user_cl_count/{user}", "AdminController@setUserCLCount")->middleware('set-users-checklists-count')
     ->where('user', '[0-9]+');
 
-Route::post("/set_user_cl_count/{user}","AdminController@setUserCLCountPost")->middleware('set-users-checklists-count')
+Route::post("/set_user_cl_count/{user}", "AdminController@setUserCLCountPost")->middleware('set-users-checklists-count')
     ->where('user', '[0-9]+');
 /**
  * User routes
  */
 Route::get('/my_checklists', "UserController@myCheckLists");
+
+Route::get('/add_checklist', "UserController@addCheckListView");
+
+Route::post('/add_checklist/{user}', "UserController@addCheckListPost")
+    ->where('user', '[0-9]+');
+
+Route::get('/check_list/{ck_list}', "UserController@CheckListView")
+    ->where('ck_list', '[0-9]+');
+
+Route::post('/check_lists/{ck_list}/item/{item}', "UserController@CheckListItemDonePost")
+    ->where([
+        'item' => '[0-9]+',
+        'ck_list'=> '[0-9]+'
+    ]);

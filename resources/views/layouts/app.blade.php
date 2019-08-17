@@ -31,6 +31,11 @@
                     Admin Page
                 </a>
             @endif
+            @if(Auth::check() ?? false)
+                <a class="navbar-brand" href="{{ url('/add_checklist') }}">
+                    Add CheckList
+                </a>
+            @endif
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">
