@@ -71,7 +71,7 @@ Route::get('/my_checklists', "UserController@myCheckLists");
 
 Route::get('/add_checklist', "UserController@addCheckListView");
 
-Route::post('/add_checklist/{user}', "UserController@addCheckListPost")
+Route::post('/add_checklist', "UserController@addCheckListPost")
     ->where('user', '[0-9]+');
 
 Route::get('/check_list/{ck_list}', "UserController@CheckListView")
@@ -80,5 +80,8 @@ Route::get('/check_list/{ck_list}', "UserController@CheckListView")
 Route::post('/check_lists/{ck_list}/item/{item}', "UserController@CheckListItemDonePost")
     ->where([
         'item' => '[0-9]+',
-        'ck_list'=> '[0-9]+'
+        'ck_list' => '[0-9]+'
     ]);
+
+Route::post("/check_list_delete/{checkList}", "UserController@CheckListDeletePost")
+    ->where("checkList", '[0-9]+');

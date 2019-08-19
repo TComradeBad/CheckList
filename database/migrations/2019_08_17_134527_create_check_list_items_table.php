@@ -19,7 +19,8 @@ class CreateCheckListItemsTable extends Migration
             $table->boolean("done")->default("0");
 
             $table->unsignedBigInteger("check_list_id");
-            $table->foreign("check_list_id")->references("id")->on("check_lists");
+            $table->foreign("check_list_id")->references("id")->on("check_lists")
+            ->onDelete("cascade");
             $table->timestamps();
         });
     }

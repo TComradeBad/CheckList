@@ -4,7 +4,7 @@
     You got : {{$user->max_check_lists_count}} checklists with {{$user->max_check_list_items_count}} items.
     <br><br>
 
-    <form method="post" action="/add_checklist/{{$user->id}}">
+    <form method="post" action="/add_checklist">
         @csrf
         Checklist name: <input type="text" name="check_list_name"><br><br>
         Items:<br>

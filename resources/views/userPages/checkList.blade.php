@@ -9,7 +9,7 @@
 
         @foreach($checkList->items as $item)
             <tr>
-               
+
                 <td>{{$item->name}}</td>
                 <td>
                     <form method="post" action="/check_lists/{{$checkList->id}}/item/{{$item->id}}">
