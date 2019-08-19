@@ -1,11 +1,15 @@
 <?php
 
 namespace App;
-
+use Schema;
 use Illuminate\Database\Eloquent\Model;
 
 class CheckList extends Model
 {
+    protected $fillable =
+        [
+          "name",
+        ];
 
     public function user()
     {
