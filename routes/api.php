@@ -17,4 +17,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource("/check_list","CheckListController");
+Route::apiResource("/check_list", "API\CheckListController");
+
+Route::apiResource("/check_list_item", "API\CheckListItemController");
+
+Route::post("/register", "API\RegisterController@register");
+
+Route::post("/login", "API\RegisterController@login");
+
+Route::group(["middleware" => "auth:api"], function () {
+    Route::get("/logout", "API\RegisterController@logout");
+});
+
+

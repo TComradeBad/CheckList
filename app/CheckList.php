@@ -1,15 +1,16 @@
 <?php
 
 namespace App;
-use Schema;
+
 use Illuminate\Database\Eloquent\Model;
 
 class CheckList extends Model
 {
-    protected $fillable =
-        [
-          "name",
-        ];
+    protected $fillable = [
+        "name",
+        "user_id",
+        "done"
+    ];
 
     public function user()
     {
@@ -18,6 +19,6 @@ class CheckList extends Model
 
     public function items()
     {
-        return $this->hasMany("App\CheckListItem","check_list_id");
+        return $this->hasMany("App\CheckListItem", "check_list_id");
     }
 }
