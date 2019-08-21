@@ -9,13 +9,6 @@
         <br>
         <br>
     @endif
-    @if(Auth::check() && Auth::user()->can('view users checklists'))
-        <a href="/users_checklists">
-            <button class="btn btn-primary">Users checklists</button>
-        </a>
-        <br>
-        <br>
-    @endif
     @if(Auth::check() && Auth::user()->can('delete users'))
         <a href="/delete_users">
             <button class="btn btn-danger">Delete Users</button>

@@ -118,8 +118,12 @@ class AdminController extends Controller
         $value1 = $request->input("max_cl");
         $value2 = $request->input("max_item");
         $user->setAttribute("max_check_lists_count", isset($value1) ? $value1 : 10);
-        $user->setAttribute("max_check_list_items_count", isset($value2) ? $value1 : 10);
+        $user->setAttribute("max_check_list_items_count", isset($value2) ? $value2 : 10);
         $user->update();
         return redirect("/set_user_cl_count/" . $user->id);
+    }
+    public function viewUserCheckLists(User $user)
+    {
+        return view("adminPages.usersCheckLists",["check_lists" => $user->checkLists()->get()]);
     }
 }
