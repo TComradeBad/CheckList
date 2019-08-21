@@ -12,6 +12,9 @@ class CheckList extends Model
         "done"
     ];
 
+    protected $appends = [
+      "items"
+    ];
     public function user()
     {
         return $this->belongsTo("App\User");
@@ -20,5 +23,11 @@ class CheckList extends Model
     public function items()
     {
         return $this->hasMany("App\CheckListItem", "check_list_id");
+    }
+
+    public function getItemsAttribute()
+    {
+        $this->attributes ["items"] = $this->items()->get();
+        return $this->attributes ["items"];
     }
 }

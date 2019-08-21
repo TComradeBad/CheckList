@@ -22,6 +22,9 @@ class CreateUsersTable extends Migration
             $table->boolean("banned")->default("0");
             $table->integer("max_check_lists_count")->default("10");
             $table->integer("max_check_list_items_count")->default("10");
+            $table->string('api_token', 80)
+                ->unique()
+                ->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

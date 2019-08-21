@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\CheckList;
 use App\CheckListItem;
+use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use PHPUnit\Util\Json;
 use Symfony\Component\Translation\Extractor\ChainExtractor;
 
 class CheckListController extends Controller
@@ -17,7 +19,7 @@ class CheckListController extends Controller
      */
     public function index()
     {
-        return response()->json(CheckList::all());
+        return response()->json(\Auth::user()->checkLists()->get());
     }
 
 
@@ -33,6 +35,9 @@ class CheckListController extends Controller
     {
         $id = $request->json()->get("user_id");
         $checkList = User::findOrFail($id)->checkLists()->create($request->json()->all());
+        foreach ($request->json()->get("items") as $item){
+            $checkList->items()->create($item);
+        }
 
         return response()->json($checkList);
     }
@@ -45,7 +50,7 @@ class CheckListController extends Controller
      */
     public function show($id)
     {
-        return response()->json(CheckList::findOrFail($id));
+        return response()->json(\Auth::user()->checkLists()->findOrFail($id));
     }
 
 

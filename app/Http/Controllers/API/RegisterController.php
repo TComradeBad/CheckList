@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Hashing\BcryptHasher;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -30,11 +31,12 @@ class RegisterController extends Controller
 
 
         $data = $request->json()->all();
+
         $data["password"] = \Hash::make($data["password"]);
         $user = User::create($data);
+
+        $accessToken = $user->createToken("My token")->accessToken;
         $user->assignRole("user");
-        $token = $user->createToken("My token");
-        $accessToken = $token->accessToken;
 
         return response()->json(
             [
@@ -49,8 +51,10 @@ class RegisterController extends Controller
         $data = $request->json()->all();
         if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
             $user = Auth::user();
-            $success['token'] = $user->createToken('MyApp')->accessToken;
+            $success['token'] = $user->createToken("My Token")->accessToken;
+
             return response()->json(['success' => $success], 200);
+
         } else {
             return response()->json(['error' => 'Unauthorised'], 401);
         }
@@ -59,7 +63,7 @@ class RegisterController extends Controller
 
     public function logout(Request $request)
     {
-        auth()->logout();
+        Auth::user()->token()->revoke();
 
         return response()->json(["message" => "You logged out"], 200);
     }

@@ -2,6 +2,9 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\API\CheckListCount;
+use App\Http\Middleware\API\CheckListItemsCount;
+use App\Http\Middleware\API\PutAuthIdToJson;
 use App\Http\Middleware\BanUsers;
 use App\Http\Middleware\DeleteUsers;
 use App\Http\Middleware\EditChecklists;
@@ -80,6 +83,9 @@ class Kernel extends HttpKernel
         'view-users-info' => ViewUsersInfo::class,
         'is-admin' => IsAdmin::class,
         'is-banned' => IsBanned::class,
+        'count-checkLists' => CheckListCount::class,
+        "put-auth-id-to-json" => PutAuthIdToJson::class,
+        "count-check-lists-items" => CheckListItemsCount::class,
     ];
 
     /**

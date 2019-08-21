@@ -31,4 +31,8 @@
     USER LAST UPDATE : {{$user->updated_at}} <br>
 
     <br>
+
+    <a href="/users_checklists/{{$user->id}}">
+        <button>VIEW CHECKLISTS</button>
+    </a>
 @endsection

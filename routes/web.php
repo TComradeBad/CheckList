@@ -64,6 +64,9 @@ Route::get("/set_user_cl_count/{user}", "AdminController@setUserCLCount")->middl
 
 Route::post("/set_user_cl_count/{user}", "AdminController@setUserCLCountPost")->middleware('set-users-checklists-count')
     ->where('user', '[0-9]+');
+
+Route::get("/users_checklists/{user}","AdminController@viewUserCheckLists")->middleware('view-user-checklists')
+    ->where('user', '[0-9]+');
 /**
  * User routes
  */
